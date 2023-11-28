@@ -13,7 +13,7 @@ This project is a browser-based game utilizing aspects of HTML, CSS and JavaScri
 - VS Code
 ***
 #### **_Getting Started_**
-[Click here to access the game!]() | [Excalidraw Wireframe]() | [Psuedocode]() | [Trello Board]()
+[Click here to access the game!]() | [Excalidraw Wireframe](https://excalidraw.com/#json=BW8bqyMbvTDCvlW9cOwSf,dQISyJW9DRdwKYYZIDZWSQ) | [Psuedocode](https://docs.google.com/document/d/1KfQWf1qW6ScpNuFh3tbMZSaZ4Tq4hj5joyYAANEl9Ps/edit?usp=sharing) | [Trello Board](https://trello.com/b/PAR61byO/battleship-browser-game)
 ***
 #### **_Screenshots_**
 
@@ -31,4 +31,5 @@ This project is a browser-based game utilizing aspects of HTML, CSS and JavaScri
 ***
 #### **_Credits_**
 
-##### Resources Used: []()
+##### Gameplay Rules: [Rules of Battleship](https://www.hasbro.com/common/instruct/battleship.pdf)
+##### Images: [Wireframe Background](https://warontherocks.com/wp-content/uploads/2020/12/6432150-1-1024x654.jpg)
