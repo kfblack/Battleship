@@ -11,7 +11,7 @@ startButton.addEventListener("click", function() {
 });
 
 musicButton.addEventListener("click", function() {
-    playIntroSound();
+    introSound.paused ? playIntroSound() : stopIntroSound();
 });
 
 function playIntroSound() {
@@ -20,4 +20,8 @@ function playIntroSound() {
 
 function playStartButton() {
     startButtonClick.play();
+}
+
+function stopIntroSound() {
+    introSound.pause();
 }
