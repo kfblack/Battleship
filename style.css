@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+    margin-top: 23vmin;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+body {
+    background-image: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.EtlJAUPiSsZRV9hL3ufeSwHaEu%26pid%3DApi&f=1&ipt=fd2ca37c2fbf9adbcae784ea31401981f6b56e11c58425ce5848631d688bc1da&ipo=images");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-align: center;
+    margin-top: -18vmin;
+}
+
+h1 {
+    font-family: "Poppins", "sans-serif";
+    font-weight: bolder;
+    color: blue;
+}
+
+h2 {
+    margin: 1vmin;
+    color: blue;
+    font-family: "Poppins", "sans-serif";
+}
+
+#start_button {
+    margin: 1vmin;
+    padding: 2vmin;
+    border-radius: 50%;
+    border: 3px solid blue;
+}
+
+#start_button:hover {
+    color: green;
+    background-color: lightgrey;
+    cursor: pointer;
+}
+
+#play_music {
+    margin: 1vmin;
+    padding: 1vmin;
+    border: 3px solid blue;
+}
+
+#play_music:hover {
+    color: green;
+    background-color: lightgrey;
+    cursor: pointer;
+}
