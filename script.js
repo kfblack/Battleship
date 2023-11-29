@@ -5,7 +5,9 @@ const startButtonClick = document.getElementById("start_click");
 
 startButton.addEventListener("click", function() {
     playStartButton();
-    window.location.href="index2.html";
+    setInterval(function() {
+        window.location.href="index2.html";
+    }, 1000);
 });
 
 musicButton.addEventListener("click", function() {
