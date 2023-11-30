@@ -13,3 +13,13 @@
     border: 1px solid black;
     aspect-ratio: 1;
 }
+
+ #battleship_img {
+    width: 80vmin;
+    height: 50vmin;
+}
+
+#destroyer_img {
+    width: 40vmin;
+    height: 20vmin;
+}

@@ -7,6 +7,9 @@ const rotateButtonCarrier = document.getElementById("rotate_carrier");
 const rotateButtonCruiser = document.getElementById("rotate_cruiser");
 const rotateButtonSubmarine = document.getElementById("rotate_submarine");
 const rotateButtonDestroyer = document.getElementById("rotate_destroyer");
+//"source" is the item you want to drag, "target" is where you want that source to be dragged to
+const source = document.querySelector(".source");
+const target = document.querySelector(".target");
 
 continueButton.addEventListener("click", function() {
     playContinueButton();
@@ -95,3 +98,32 @@ function rotatePieceDestroyer() {
   }
   destroyerPiece.style.transform = `rotate(${angle}deg)`;
 };
+
+//using OOP with classes to make a ship class to describe all 5 ships
+class Ships {
+    constructor(name, length) {
+        this.name = name
+        this.length = length
+    }
+}
+
+const battleship = new Ships("Battleship", 4)
+const carrier = new Ships("Carrier", 5)
+const cruiser = new Ships("Cruiser", 3)
+const submarine = new Ships("Submarine", 3)
+const destroyer = new Ships("Destroyer", 2)
+
+//dragging and dropping operation
+source.addEventListener("dragstart", function(evt) {
+    evt.dataTransfer.setData("image/png", evt.target.id);
+});
+
+target.addEventListener("dragover", function(evt) {
+    evt.preventDefault();
+});
+
+target.addEventListener("drop", function(evt) {
+    evt.preventDefault();
+    const sourceID = evt.dataTransfer.getData("image/png");
+    evt.target.appendChild(document.getElementById(sourceID));
+});
