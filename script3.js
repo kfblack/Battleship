@@ -1,12 +1,15 @@
-const Ships = {
-    constructor(name, length) {
-        this.name = name
-        this.length = length
-    }
+const musicButton = document.getElementById("music_button");
+const introSound = document.getElementById("intro_sound");
+
+
+musicButton.addEventListener("click", function() {
+    introSound.paused ? playIntroSound() : stopIntroSound();
+});
+
+function playIntroSound() {
+    introSound.play();
 }
 
-const battleship = new Ships("Battleship", 4)
-const carrier = new Ships("Carrier", 5)
-const cruiser = new Ships("Cruiser", 3)
-const submarine = new Ships("Submarine", 3)
-const destroyer = new Ships("Destroyer", 2)
+function stopIntroSound() {
+    introSound.pause();
+}

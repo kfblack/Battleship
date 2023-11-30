@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <audio id="intro_sound" src="mixkit-i-wont-surrender-846.mp3" preload="auto"></audio>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href='style3.css'/>
@@ -8,12 +9,17 @@
     <title>Battleship Game</title>
 </head>
 <body>
-    <p>DIRECITONS:</p>
-    <ul>
-        <li>Click on opponenets board to fire at their ships</li>
-        <li>If hit, you are instructed to fire again until you miss</li>
-        <li>Once your turn is over, press "continue" and allow Player 2's turn</li>
-        <li>The first player to sink all oppenent's ships wins, good luck!</li>
-    </ul>
+    <section class="directions">
+        <p>DIRECITONS:</p>
+             <ul>
+                 <li>Click on opponenets board to fire at their ships</li>
+                 <li>If hit, you are instructed to fire again until you miss</li>
+                 <li>Once your turn is over, press "continue" and allow Player 2's turn</li>
+                 <li>The first player to sink all oppenent's ships wins, good luck!</li>
+            </ul>
+    </section>
+    <section class="buttons">
+        <button id="music_button">Music On/Off</button>
+    </section>
 </body>
 </html>

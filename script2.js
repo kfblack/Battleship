@@ -38,7 +38,8 @@ rotateButtonBattleship.addEventListener("click", rotatePieceBattleship);
 
 let angle = 0;
 function rotatePieceBattleship() {
-  const battleshipPiece = document.getElementById("battleship");
+  const battleshipPiece = document.querySelector(".battleship_layout");
+  // const battleshipPiece = document.getElementById("battleship");
   if (angle === 0) {
     angle = 90;
   } else {
@@ -51,7 +52,7 @@ rotateButtonCarrier.addEventListener("click", rotatePieceCarrier);
 
 
 function rotatePieceCarrier() {
-  const carrierPiece = document.getElementById("carrier");
+  const carrierPiece = document.querySelector(".carrier_layout");
   if (angle === 0) {
     angle = 90;
   } else {
@@ -64,7 +65,7 @@ rotateButtonCruiser.addEventListener("click", rotatePieceCruiser);
 
 
 function rotatePieceCruiser() {
-  const cruiserPiece = document.getElementById("cruiser");
+  const cruiserPiece = document.querySelector(".cruiser_layout");
   if (angle === 0) {
     angle = 90;
   } else {
@@ -77,7 +78,7 @@ rotateButtonSubmarine.addEventListener("click", rotatePieceSubmarine);
 
 
 function rotatePieceSubmarine() {
-  const submarinePiece = document.getElementById("submarine");
+  const submarinePiece = document.querySelector(".submarine_layout");
   if (angle === 0) {
     angle = 90;
   } else {
@@ -90,7 +91,7 @@ rotateButtonDestroyer.addEventListener("click", rotatePieceDestroyer);
 
 
 function rotatePieceDestroyer() {
-  const destroyerPiece = document.getElementById("destroyer");
+  const destroyerPiece = document.querySelector(".destroyer_layout");
   if (angle === 0) {
     angle = 90;
   } else {
@@ -99,12 +100,11 @@ function rotatePieceDestroyer() {
   destroyerPiece.style.transform = `rotate(${angle}deg)`;
 };
 
-//using OOP with classes to make a ship class to describe all 5 ships
 class Ships {
-    constructor(name, length) {
-        this.name = name
-        this.length = length
-    }
+  constructor(name, length) {
+      this.name = name
+      this.length = length
+  }
 }
 
 const battleship = new Ships("Battleship", 4)
@@ -113,18 +113,49 @@ const cruiser = new Ships("Cruiser", 3)
 const submarine = new Ships("Submarine", 3)
 const destroyer = new Ships("Destroyer", 2)
 
+const ships = [battleship, carrier, cruiser, submarine, destroyer];
 
-source.addEventListener("dragstart", function(evt) {
-    evt.dataTransfer.setData("image/png", evt.target.id);
+// source.addEventListener("dragstart", function(evt) {
+//     // evt.dataTransfer.setData("image/png", evt.target.id);
+//     evt.dataTransfer.setData("text/plain", evt.target.id);
+// });
+
+// target.addEventListener("dragover", function(evt) {
+//     evt.preventDefault();
+// });
+
+// target.addEventListener("drop", function(evt) {
+//     evt.preventDefault();
+//     // const sourceID = evt.dataTransfer.getData("image/png");
+//     const sourceID = evt.dataTransfer.getData("text/plain");
+//     evt.target.appendChild(document.getElementById(sourceID));
+// });
+
+let draggedShip
+const optionShips = Array.from(source.children);
+optionShips.forEach(optionShip => optionShip.addEventListener("dragstart", dragStart));
+
+const allPlayerBlocks = document.querySelectorAll(".target");
+allPlayerBlocks.forEach(playerBlock => {
+  playerBlock.addEventListener("dragover", dragOver);
+  playerBlock.addEventListener("drop", dropShip);
 });
 
-target.addEventListener("dragover", function(evt) {
-    evt.preventDefault();
-});
+function dragStart(evt) {
+  draggedShip = evt.target;
+}
 
-target.addEventListener("drop", function(evt) {
-    evt.preventDefault();
-    const sourceID = evt.dataTransfer.getData("image/png");
-    evt.target.appendChild(document.getElementById(sourceID));
-});
+function dragOver(evt) {
+  evt.preventDefault();
 
+}
+
+function dropShip(evt) {
+  const startId = evt.target.id;
+  const ship = ships[draggedShip.id];
+  addShipPiece("player", ship, startId);
+}
+
+function addShipPiece() {
+  const allBoardPieces = document.querySelectorAll(".board");
+}
