@@ -14,12 +14,38 @@
     aspect-ratio: 1;
 }
 
- #battleship_img {
-    width: 80vmin;
-    height: 50vmin;
+
+p {
+    border: 1vmin solid black;
+    padding: 2vmin;
+}
+
+#battleship_img {
+    width: 100%;
+    height: 100%;
+    grid-column: span 4;
+}
+
+#carrier_img {
+    width: 100%;
+    height: 100%;
+    grid-column: span 5;
+}
+
+#cruiser_img {
+    width: 100%;
+    height: 100%;
+    grid-column: span 3;
+}
+
+#submarine_img {
+    width: 100%;
+    height: 100%;
+    grid-column: span 3;
 }
 
 #destroyer_img {
-    width: 40vmin;
-    height: 20vmin;
+    width: 100%;
+    height: 100%;
+    grid-column: span 2;
 }

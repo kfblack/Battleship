@@ -113,7 +113,7 @@ const cruiser = new Ships("Cruiser", 3)
 const submarine = new Ships("Submarine", 3)
 const destroyer = new Ships("Destroyer", 2)
 
-//dragging and dropping operation
+
 source.addEventListener("dragstart", function(evt) {
     evt.dataTransfer.setData("image/png", evt.target.id);
 });
@@ -127,3 +127,4 @@ target.addEventListener("drop", function(evt) {
     const sourceID = evt.dataTransfer.getData("image/png");
     evt.target.appendChild(document.getElementById(sourceID));
 });
+
