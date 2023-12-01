@@ -14,12 +14,12 @@ const sourceTwo = document.querySelector(".source_2");
 const targetTwo = document.querySelector(".target_2");
 
 //buttons//
-continueButton.addEventListener("click", function() {
-    playContinueButton();
-    setInterval(function() {
-        window.location.href="index3.html";
-    }, 1000);
-});
+continueButton.addEventListener("click", startGame) 
+//     playContinueButton();
+//     setInterval(function() {
+//         //need to add for it to start the next phase of game//
+//     }, 1000);
+// });
 
 musicButton.addEventListener("click", function() {
     introSound.paused ? playIntroSound() : stopIntroSound();
@@ -42,7 +42,6 @@ rotateButtonBattleship.addEventListener("click", rotatePieceBattleship);
 let angle = 0;
 function rotatePieceBattleship() {
   const battleshipPiece = document.querySelector(".battleship_layout");
-  // const battleshipPiece = document.getElementById("battleship");
   if (angle === 0) {
     angle = 90;
   } else {
@@ -106,7 +105,6 @@ function rotatePieceDestroyer() {
 //drag and drop//
 
 sourceOne.addEventListener("dragstart", function(evt) {
-    // evt.dataTransfer.setData("image/png", evt.target.id);
     evt.dataTransfer.setData("text/plain", evt.target.id);
 });
 
@@ -116,14 +114,12 @@ targetOne.addEventListener("dragover", function(evt) {
 
 targetOne.addEventListener("drop", function(evt) {
     evt.preventDefault();
-    // const sourceID = evt.dataTransfer.getData("image/png");
     const sourceID = evt.dataTransfer.getData("text/plain");
     evt.target.appendChild(document.getElementById(sourceID));
 });
 
 
 sourceTwo.addEventListener("dragstart", function(evt) {
-     // evt.dataTransfer.setData("image/png", evt.target.id);
      evt.dataTransfer.setData("text/plain", evt.target.id);
 });
 
@@ -133,32 +129,13 @@ sourceTwo.addEventListener("dragstart", function(evt) {
 
 targetTwo.addEventListener("drop", function(evt) {
      evt.preventDefault();
-    // const sourceID = evt.dataTransfer.getData("image/png");
     const sourceID = evt.dataTransfer.getData("text/plain");
     evt.target.appendChild(document.getElementById(sourceID));
 });
 
-// function addShipPiece(ship, startId) {
-//   const allBoardBlocks = document.getElementById("board_pieces");
-//   let isHorizontal = angle === 0;
-//   let startIndex = startId;
-//   let shipBlocks = [];
-//   for (let i=0; i < ship.length; i++) {
-//     if (isHorizontal) {
-//       shipBlocks.push(allBoardBlocks[startIndex + i]);
-//     } else {
-//       shipBlocks.push(allBoardBlocks[startIndex + i * width]); 
-//     }
-//     shipBlocks.forEach(shipBlock => {
-//       shipBlock.classList.add(ship.name);
-//       shipBlock.classList.add("taken");
-//     });
-//   }
-// }
-
-// ships.forEach(ship => addShipPiece(ship));
-//NEED TO GO BACK AND MAKE THIS FUNCTION TO DIFFERENTIATE BETWEEN PLAYER 1 AND 2 
-
+function startGame() {
+  
+}
 
 class Ship {
   constructor(name, length) {
@@ -174,4 +151,86 @@ const submarine = new Ship("Submarine", 3)
 const destroyer = new Ship("Destroyer", 2)
 
 const ships = [battleship, carrier, cruiser, submarine, destroyer];
-// let notDropped;
+
+//hit, miss, and sink functionality//
+
+let turn;
+let winner;
+let scoreCount;
+let shipCount; 
+let scoresUpdated = false;
+
+
+const gameDirections = document.querySelectorAll(".game_directions");
+const turnMessage = document.getElementById("player_turn");
+const hitMessage = document.getElementById("hit_message");
+const missMessage= document.getElementById("miss_message");
+const playerScore = document.querySelector("h2");
+
+const players = {
+  "1": "Player 1",
+  "2": "Player 2",
+}
+
+init();
+
+function init() {
+  scoresUpdated = false;
+  let winner = null;
+  let scoreCount = {
+    "1": 0,
+    "2": 0,
+  }
+  let turn = 1;
+  let shipCount = 5;
+  render();
+}
+
+function render() {
+  renderDirections();
+  renderWinnerTurnMessage();
+  renderHitMessage();
+}
+
+function renderDirections() {
+  return gameDirections;
+}
+
+function updatedShipCount() {
+
+}
+
+
+function renderWinnerTurnMessage() {
+  if (winner) {
+    turnMessage.innerHTML = `<span id="player_turn">${players[winner]}</span> Wins!`
+    updateScores();
+  } else {
+    turnMessage.innerHTML = `<span id="player_turn">${players[turn]}</span>`
+  }
+}
+
+function renderHitMessage() {
+
+}
+
+function updateScores () {
+  if (winner && !scoresUpdated) {
+      scoreCount[winner]++;
+      scoresUpdated = true;
+      playWinSound();
+  }
+  playerScore.innerHTML = `Player 1: ${scoreCount["1"]} <br></br> Player 2: ${scoreCount["2"]}`;
+}
+
+function playWinSound() {
+  //fill in with the winning audio when I have time for it//
+}
+
+function handleMoveClick (evt) {
+  if (evt.target.classList.contains(".ships")) {
+    return hitMessage;
+  } else {
+    return missMessage;
+  }
+}

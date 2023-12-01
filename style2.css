@@ -25,15 +25,15 @@
 }
 
 
-p {
+.layout_direction {
     border: 1vmin solid black;
     padding: 2vmin;
 }
 
-/* .ship {
-    width: 100%;
-    height: 100%;
-} */
+.game_directions {
+    border: 1vmin solid black;
+    padding: 2vmin;
+}
 
 .ships {
     background-color: orange;
