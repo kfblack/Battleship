@@ -115,6 +115,7 @@ targetOne.addEventListener("dragover", function(evt) {
 targetOne.addEventListener("drop", function(evt) {
     evt.preventDefault();
     const sourceID = evt.dataTransfer.getData("text/plain");
+    evt.target.classList.add("active");
     evt.target.appendChild(document.getElementById(sourceID));
 });
 
@@ -130,6 +131,7 @@ sourceTwo.addEventListener("dragstart", function(evt) {
 targetTwo.addEventListener("drop", function(evt) {
      evt.preventDefault();
     const sourceID = evt.dataTransfer.getData("text/plain");
+    evt.target.classList.add("active");
     evt.target.appendChild(document.getElementById(sourceID));
 });
 
@@ -141,6 +143,7 @@ class Ship {
   constructor(name, length) {
       this.name = name
       this.length = length
+      this.sunk = false
   }
 }
 
@@ -154,8 +157,10 @@ const ships = [battleship, carrier, cruiser, submarine, destroyer];
 
 //hit, miss, and sink functionality//
 
-let turn;
+let turn = 1;
 let winner;
+let hit;
+let miss;
 let scoreCount;
 let shipCount; 
 let scoresUpdated = false;
@@ -164,32 +169,35 @@ let scoresUpdated = false;
 const gameDirections = document.querySelectorAll(".game_directions");
 const turnMessage = document.getElementById("player_turn");
 const hitMessage = document.getElementById("hit_message");
-const missMessage= document.getElementById("miss_message");
 const playerScore = document.querySelector("h2");
+const restartButton = document.getElementById("replay_button");
+const remainingShips = document.querySelector("h3");
+const bothBoards = document.querySelectorAll("both-boards");
+
+restartButton.addEventListener("click", init);
 
 const players = {
   "1": "Player 1",
-  "2": "Player 2",
+  "-1": "Player 2",
 }
 
 init();
 
 function init() {
   scoresUpdated = false;
-  let winner = null;
-  let scoreCount = {
+  winner = null;
+  scoreCount = {
     "1": 0,
-    "2": 0,
+    "-1": 0,
   }
-  let turn = 1;
-  let shipCount = 5;
+  turn = 1;
+  shipCount = 5;
   render();
 }
 
 function render() {
   renderDirections();
   renderWinnerTurnMessage();
-  renderHitMessage();
 }
 
 function renderDirections() {
@@ -197,40 +205,98 @@ function renderDirections() {
 }
 
 function updatedShipCount() {
+  return remainingShips;
+};
 
-}
 
+function getWinner () {
+  return winner;
+};
 
 function renderWinnerTurnMessage() {
   if (winner) {
     turnMessage.innerHTML = `<span id="player_turn">${players[winner]}</span> Wins!`
     updateScores();
   } else {
-    turnMessage.innerHTML = `<span id="player_turn">${players[turn]}</span>`
-  }
-}
-
-function renderHitMessage() {
-
-}
+    turnMessage.innerHTML = `${players[turn]}`
+  };
+};
 
 function updateScores () {
   if (winner && !scoresUpdated) {
       scoreCount[winner]++;
       scoresUpdated = true;
       playWinSound();
-  }
-  playerScore.innerHTML = `Player 1: ${scoreCount["1"]} <br></br> Player 2: ${scoreCount["2"]}`;
-}
+  };
+  playerScore.innerHTML = `Player 1: ${scoreCount["1"]} <br></br> Player 2: ${scoreCount["-1"]}`;
+};
 
 function playWinSound() {
   //fill in with the winning audio when I have time for it//
-}
+};
 
 function handleMoveClick (evt) {
-  if (evt.target.classList.contains(".ships")) {
-    return hitMessage;
+  const clickedCell = evt.target;
+  if (clickedCell.classList.contains("active")) {
+    hitMessage.innerHTML = `<span id="hit_message">Hit!</span>`;
+    clickedCell.style.backgroundColor = "red";
+    updateShipStatus(clickedCell);
+    if (areAllShipsSunk()) {
+      winner = turn;
+    }
   } else {
-    return missMessage;
+    hitMessage.innerHTML = `<span id="hit_message">Miss!</span>`;
+    clickedCell.style.backgroundColor = "blue";
+  };
+  turn *= -1;
+  render();
+};
+
+document.querySelectorAll(".both_boards").forEach(cell => {
+  cell.addEventListener("click", handleMoveClick);
+});
+
+function updateShipStatus(clickedCell) {
+  const shipName = extractShipName(clickedCell);
+  if (shipName) {
+    const ship = findShipByName(shipName);
+    ship.length--;
+    if (ship.length === 0) {
+      ship.sunk = true;
+      shipCount--;
+      if (shipCount === 0) {
+        winner = turn;
+      };
+    };
+  };
+};
+
+
+
+function areAllShipsSunk() {
+  for (const ship of ships) {
+    if (!ship.sunk) {
+      return false;
+    }
   }
+  return true;
+}
+
+function extractShipName(element) {
+  const classList = element.classList;
+  for (const className of classList) {
+    if (className.includes("layout")) {
+      return className;
+    };
+  }
+  return null;
+}
+
+function findShipByName(shipName) {
+  for (const ship of ships) {
+    if (ship.name === shipName) {
+      return ship;
+    };
+  };
+  return null;
 }
