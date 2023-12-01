@@ -232,7 +232,6 @@ function updateScores () {
 };
 
 function playWinSound() {
-  //fill in with the winning audio when I have time for it//
 };
 
 function handleMoveClick (evt) {
@@ -245,9 +244,10 @@ function handleMoveClick (evt) {
     clickedCell.style.backgroundColor = "blue";
     updateShipStatus(clickedCell);
   } else {
+    const parentCell = clickedCell.parentElement;
+    updateShipStatus(parentCell);
     hitMessage.innerHTML = `<span id="hit_message">Hit!</span>`;
     clickedCell.style.backgroundColor = "red";
-    updateShipStatus(clickedCell);
     if (areAllShipsSunk()) {
       winner = turn;
     }
@@ -283,8 +283,6 @@ function updateShipStatus(clickedCell) {
   }
 };
 
-
-
 function areAllShipsSunk() {
   for (const ship of ships) {
     if (!ship.sunk) {
@@ -296,12 +294,12 @@ function areAllShipsSunk() {
 
 function extractShipName(element) {
   const classList = element.classList;
-  console.log("ClassList:", classList);
   for (const className of classList) {
-    if (className.includes("layout")) {
-      console.log(`Ship name extracted: ${className}`);
-      return className.replace("_layout", "");
-    };
+    const ship = findShipByName(className);
+    if (ship) {
+      console.log(`Ship name extracted: ${ship.name}`);
+      return ship.name;
+    }
   }
   console.log("No ship name found");
   return null;
@@ -321,4 +319,3 @@ function findShipByName(shipName) {
   console.log("No ship found with the name:", cleanedShipName);
   return null;
 }
-
