@@ -237,16 +237,20 @@ function playWinSound() {
 
 function handleMoveClick (evt) {
   const clickedCell = evt.target;
-  if (clickedCell.classList.contains("active")) {
+  if (winner) {
+    return;
+  }
+  if (!clickedCell.classList.contains("active")) {
+    hitMessage.innerHTML = `<span id="hit_message">Miss!</span>`;
+    clickedCell.style.backgroundColor = "blue";
+    updateShipStatus(clickedCell);
+  } else {
     hitMessage.innerHTML = `<span id="hit_message">Hit!</span>`;
     clickedCell.style.backgroundColor = "red";
     updateShipStatus(clickedCell);
     if (areAllShipsSunk()) {
       winner = turn;
     }
-  } else {
-    hitMessage.innerHTML = `<span id="hit_message">Miss!</span>`;
-    clickedCell.style.backgroundColor = "blue";
   };
   turn *= -1;
   render();
@@ -260,15 +264,23 @@ function updateShipStatus(clickedCell) {
   const shipName = extractShipName(clickedCell);
   if (shipName) {
     const ship = findShipByName(shipName);
-    ship.length--;
-    if (ship.length === 0) {
-      ship.sunk = true;
-      shipCount--;
-      if (shipCount === 0) {
-        winner = turn;
+    if (ship) {
+      ship.length--;
+      console.log(`Ship "${shipName}" hit! Remaining length: ${ship.length}`);
+      if (ship.length === 0) {
+        ship.sunk = true;
+        shipCount--;
+        console.log(`Ship "${shipName}" sunk! Remaining ships: ${shipCount}`);
+        if (shipCount === 0) {
+          winner = turn;
+        }
       };
-    };
-  };
+    } else {
+      console.log(`No ship found with name "${shipName}"`);
+    }
+  } else {
+    console.log("no ship name found");
+  }
 };
 
 
@@ -284,19 +296,29 @@ function areAllShipsSunk() {
 
 function extractShipName(element) {
   const classList = element.classList;
+  console.log("ClassList:", classList);
   for (const className of classList) {
     if (className.includes("layout")) {
-      return className;
+      console.log(`Ship name extracted: ${className}`);
+      return className.replace("_layout", "");
     };
   }
+  console.log("No ship name found");
   return null;
 }
 
+
 function findShipByName(shipName) {
+  const cleanedShipName = shipName.trim().toLowerCase();
+  console.log("Searching for ship with name:", cleanedShipName);
   for (const ship of ships) {
-    if (ship.name === shipName) {
+    console.log("Comparing with ship:", ship.name.toLowerCase());
+    if (ship.name.toLowerCase() === cleanedShipName) {
+      console.log("Ship found:", ship);
       return ship;
-    };
-  };
+    }
+  }
+  console.log("No ship found with the name:", cleanedShipName);
   return null;
 }
+
