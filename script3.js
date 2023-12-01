@@ -13,3 +13,4 @@ function playIntroSound() {
 function stopIntroSound() {
     introSound.pause();
 }
+

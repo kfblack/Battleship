@@ -1,3 +1,4 @@
+//constants//
 const introSound = document.getElementById("intro_sound");
 const musicButton = document.getElementById("play_music");
 const continueButton = document.getElementById("continue_button");
@@ -7,10 +8,12 @@ const rotateButtonCarrier = document.getElementById("rotate_carrier");
 const rotateButtonCruiser = document.getElementById("rotate_cruiser");
 const rotateButtonSubmarine = document.getElementById("rotate_submarine");
 const rotateButtonDestroyer = document.getElementById("rotate_destroyer");
-//"source" is the item you want to drag, "target" is where you want that source to be dragged to
-const source = document.querySelector(".source");
-const target = document.querySelector(".target");
+const sourceOne = document.querySelector(".source_1");
+const targetOne = document.querySelector(".target_1");
+const sourceTwo = document.querySelector(".source_2");
+const targetTwo = document.querySelector(".target_2");
 
+//buttons//
 continueButton.addEventListener("click", function() {
     playContinueButton();
     setInterval(function() {
@@ -100,62 +103,75 @@ function rotatePieceDestroyer() {
   destroyerPiece.style.transform = `rotate(${angle}deg)`;
 };
 
-class Ships {
+//drag and drop//
+
+sourceOne.addEventListener("dragstart", function(evt) {
+    // evt.dataTransfer.setData("image/png", evt.target.id);
+    evt.dataTransfer.setData("text/plain", evt.target.id);
+});
+
+targetOne.addEventListener("dragover", function(evt) {
+    evt.preventDefault();
+  });
+
+targetOne.addEventListener("drop", function(evt) {
+    evt.preventDefault();
+    // const sourceID = evt.dataTransfer.getData("image/png");
+    const sourceID = evt.dataTransfer.getData("text/plain");
+    evt.target.appendChild(document.getElementById(sourceID));
+});
+
+
+sourceTwo.addEventListener("dragstart", function(evt) {
+     // evt.dataTransfer.setData("image/png", evt.target.id);
+     evt.dataTransfer.setData("text/plain", evt.target.id);
+});
+
+ targetTwo.addEventListener("dragover", function(evt) {
+   evt.preventDefault();
+ });
+
+targetTwo.addEventListener("drop", function(evt) {
+     evt.preventDefault();
+    // const sourceID = evt.dataTransfer.getData("image/png");
+    const sourceID = evt.dataTransfer.getData("text/plain");
+    evt.target.appendChild(document.getElementById(sourceID));
+});
+
+// function addShipPiece(ship, startId) {
+//   const allBoardBlocks = document.getElementById("board_pieces");
+//   let isHorizontal = angle === 0;
+//   let startIndex = startId;
+//   let shipBlocks = [];
+//   for (let i=0; i < ship.length; i++) {
+//     if (isHorizontal) {
+//       shipBlocks.push(allBoardBlocks[startIndex + i]);
+//     } else {
+//       shipBlocks.push(allBoardBlocks[startIndex + i * width]); 
+//     }
+//     shipBlocks.forEach(shipBlock => {
+//       shipBlock.classList.add(ship.name);
+//       shipBlock.classList.add("taken");
+//     });
+//   }
+// }
+
+// ships.forEach(ship => addShipPiece(ship));
+//NEED TO GO BACK AND MAKE THIS FUNCTION TO DIFFERENTIATE BETWEEN PLAYER 1 AND 2 
+
+
+class Ship {
   constructor(name, length) {
       this.name = name
       this.length = length
   }
 }
 
-const battleship = new Ships("Battleship", 4)
-const carrier = new Ships("Carrier", 5)
-const cruiser = new Ships("Cruiser", 3)
-const submarine = new Ships("Submarine", 3)
-const destroyer = new Ships("Destroyer", 2)
+const battleship = new Ship("Battleship", 4)
+const carrier = new Ship("Carrier", 5)
+const cruiser = new Ship("Cruiser", 3)
+const submarine = new Ship("Submarine", 3)
+const destroyer = new Ship("Destroyer", 2)
 
 const ships = [battleship, carrier, cruiser, submarine, destroyer];
-
-// source.addEventListener("dragstart", function(evt) {
-//     // evt.dataTransfer.setData("image/png", evt.target.id);
-//     evt.dataTransfer.setData("text/plain", evt.target.id);
-// });
-
-// target.addEventListener("dragover", function(evt) {
-//     evt.preventDefault();
-// });
-
-// target.addEventListener("drop", function(evt) {
-//     evt.preventDefault();
-//     // const sourceID = evt.dataTransfer.getData("image/png");
-//     const sourceID = evt.dataTransfer.getData("text/plain");
-//     evt.target.appendChild(document.getElementById(sourceID));
-// });
-
-let draggedShip
-const optionShips = Array.from(source.children);
-optionShips.forEach(optionShip => optionShip.addEventListener("dragstart", dragStart));
-
-const allPlayerBlocks = document.querySelectorAll(".target");
-allPlayerBlocks.forEach(playerBlock => {
-  playerBlock.addEventListener("dragover", dragOver);
-  playerBlock.addEventListener("drop", dropShip);
-});
-
-function dragStart(evt) {
-  draggedShip = evt.target;
-}
-
-function dragOver(evt) {
-  evt.preventDefault();
-
-}
-
-function dropShip(evt) {
-  const startId = evt.target.id;
-  const ship = ships[draggedShip.id];
-  addShipPiece("player", ship, startId);
-}
-
-function addShipPiece() {
-  const allBoardPieces = document.querySelectorAll(".board");
-}
+// let notDropped;

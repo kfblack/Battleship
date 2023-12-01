@@ -4,6 +4,16 @@
     padding: 0;
 }
 
+#board_pieces_player2 {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+}
+
+#board_pieces_player2 > div {
+    border: 1px solid black;
+    aspect-ratio: 1;
+}
+
 .board {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
