@@ -1,8 +1,6 @@
-//constants//
+// general constants to be used throughout code
 const introSound = document.getElementById("intro_sound");
 const musicButton = document.getElementById("play_music");
-const continueButton = document.getElementById("continue_button");
-const continueButtonClick = document.getElementById("continue_click");
 const rotateButtonBattleship = document.getElementById("rotate_battleship");
 const rotateButtonCarrier = document.getElementById("rotate_carrier");
 const rotateButtonCruiser = document.getElementById("rotate_cruiser");
@@ -13,14 +11,7 @@ const targetOne = document.querySelector(".target_1");
 const sourceTwo = document.querySelector(".source_2");
 const targetTwo = document.querySelector(".target_2");
 
-//buttons//
-continueButton.addEventListener("click", startGame) 
-//     playContinueButton();
-//     setInterval(function() {
-//         //need to add for it to start the next phase of game//
-//     }, 1000);
-// });
-
+// general functions for sound and rotation (could go back and make all rotate buttons 1 function to include all pieces)
 musicButton.addEventListener("click", function() {
     introSound.paused ? playIntroSound() : stopIntroSound();
 });
@@ -29,9 +20,6 @@ function playIntroSound() {
     introSound.play();
 }
 
-function playContinueButton() {
-    continueButtonClick.play();
-}
 
 function stopIntroSound() {
     introSound.pause();
@@ -102,7 +90,7 @@ function rotatePieceDestroyer() {
   destroyerPiece.style.transform = `rotate(${angle}deg)`;
 };
 
-//drag and drop//
+//code for drag and drop functionality 
 
 sourceOne.addEventListener("dragstart", function(evt) {
     evt.dataTransfer.setData("text/plain", evt.target.id);
@@ -135,9 +123,7 @@ targetTwo.addEventListener("drop", function(evt) {
     evt.target.appendChild(document.getElementById(sourceID));
 });
 
-function startGame() {
-  
-}
+// ship OOP class
 
 class Ship {
   constructor(name, length) {
@@ -155,7 +141,7 @@ const destroyer = new Ship("Destroyer", 2)
 
 const ships = [battleship, carrier, cruiser, submarine, destroyer];
 
-//hit, miss, and sink functionality//
+//start of actual game logic 
 
 let turn = 1;
 let winner;
@@ -171,10 +157,27 @@ const turnMessage = document.getElementById("player_turn");
 const hitMessage = document.getElementById("hit_message");
 const playerScore = document.querySelector("h2");
 const restartButton = document.getElementById("replay_button");
+const startButton = document.getElementById("start_button");
 const remainingShips = document.querySelector("h3");
 const bothBoards = document.querySelectorAll("both-boards");
 
-restartButton.addEventListener("click", init);
+restartButton.addEventListener("click", resetGame);
+startButton.addEventListener("click", startNewGame);
+
+function resetGame() {
+  init();
+  showShips();
+  showButtons();
+}
+
+function showButtons() {
+  const rotateButtons = document.querySelectorAll(".rotate_buttons");
+  const restartButton = document.getElementById("replay_button");
+  rotateButtons.forEach(button => {
+    button.style.visibility = "visible"
+  });
+  restartButton.style.visibility = "visible";
+}
 
 const players = {
   "1": "Player 1",
@@ -195,6 +198,7 @@ function init() {
   render();
 }
 
+
 function render() {
   renderDirections();
   renderWinnerTurnMessage();
@@ -208,10 +212,6 @@ function updatedShipCount() {
   return remainingShips;
 };
 
-
-function getWinner () {
-  return winner;
-};
 
 function renderWinnerTurnMessage() {
   if (winner) {
@@ -260,6 +260,8 @@ document.querySelectorAll(".both_boards").forEach(cell => {
   cell.addEventListener("click", handleMoveClick);
 });
 
+//attempting to draw out ship status from placing them within grids 
+
 function updateShipStatus(clickedCell) {
   const shipName = extractShipName(clickedCell);
   if (shipName) {
@@ -292,6 +294,7 @@ function areAllShipsSunk() {
   return true;
 }
 
+//this is the probelm area, when the grid is clicked it is just reading the grid click and trying to match a ship to it, rather than recognizing there is a ship in it to compare
 function extractShipName(element) {
   const classList = element.classList;
   for (const className of classList) {
@@ -318,4 +321,42 @@ function findShipByName(shipName) {
   }
   console.log("No ship found with the name:", cleanedShipName);
   return null;
+}
+
+//rendering different things when restart or start game button pressed 
+
+function hideShips() {
+  const ships = document.querySelectorAll('.ship');
+  ships.forEach(ship => {
+    ship.classList.add('hidden');
+  });
+}
+
+
+function showShips() {
+  const ships = document.querySelectorAll('.ship');
+  ships.forEach(ship => {
+    ship.classList.remove('hidden');
+  });
+}
+
+function placementComplete() {
+  hideShips();
+}
+
+function startNewGame() {
+  init();
+  hideUI();
+  placementComplete();
+}
+
+function hideUI() {
+  const rotateButtons = document.querySelectorAll(".rotate_buttons");
+  const instructionsLayout = document.querySelector(".layout_direction");
+  const restartButton = document.getElementById("replay_button");
+  rotateButtons.forEach(button => {
+    button.style.visibility = "hidden"
+  });
+  restartButton.style.visibility = "hidden";
+  instructionsLayout.style.visibility = "hidden";
 }
