@@ -244,7 +244,7 @@ function handleMoveClick (evt) {
     clickedCell.style.backgroundColor = "blue";
     updateShipStatus(clickedCell);
   } else {
-    const parentCell = clickedCell.parentElement;
+    const parentCell = clickedCell.children[0];
     updateShipStatus(parentCell);
     hitMessage.innerHTML = `<span id="hit_message">Hit!</span>`;
     clickedCell.style.backgroundColor = "red";
@@ -268,11 +268,9 @@ function updateShipStatus(clickedCell) {
     const ship = findShipByName(shipName);
     if (ship) {
       ship.length--;
-      console.log(`Ship "${shipName}" hit! Remaining length: ${ship.length}`);
       if (ship.length === 0) {
         ship.sunk = true;
         shipCount--;
-        console.log(`Ship "${shipName}" sunk! Remaining ships: ${shipCount}`);
         if (shipCount === 0) {
           winner = turn;
         }
@@ -300,7 +298,6 @@ function extractShipName(element) {
   for (const className of classList) {
     const ship = findShipByName(className);
     if (ship) {
-      console.log(`Ship name extracted: ${ship.name}`);
       return ship.name;
     }
   }
@@ -311,15 +308,11 @@ function extractShipName(element) {
 
 function findShipByName(shipName) {
   const cleanedShipName = shipName.trim().toLowerCase();
-  console.log("Searching for ship with name:", cleanedShipName);
   for (const ship of ships) {
-    console.log("Comparing with ship:", ship.name.toLowerCase());
     if (ship.name.toLowerCase() === cleanedShipName) {
-      console.log("Ship found:", ship);
       return ship;
     }
   }
-  console.log("No ship found with the name:", cleanedShipName);
   return null;
 }
 
