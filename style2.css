@@ -29,11 +29,17 @@
 .layout_direction {
     border: 1vmin solid black;
     padding: 2vmin;
+    position: absolute;
+    top: 0;
+    left: 80%;
 }
 
 .game_directions {
     border: 1vmin solid black;
     padding: 2vmin;
+    position: absolute;
+    top: 10vmin;
+    left: 80%;
 }
 
 .ships {
@@ -43,7 +49,7 @@
 }
 
 .battleship {
-    background-color: red;
+    background-color: gold;
 }
 
 .battleship_layout {
@@ -87,6 +93,56 @@
 }
 
 .destroyer_layout {
+    width: 2vmin;
+    height: 1vmin;
+    margin: 1vmin;
+}
+
+.hidden {
+    display: none;
+}
+
+.rotate_buttons {
+    position: absolute;
+    top: 0;
+    left: 50%;
+}
+
+
+.rotate_buttons2 {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+}
+
+.battleship_layout2 {
+    width: 4vmin;
+    height: 1vmin;
+    margin: 1vmin;
+}
+
+
+.carrier_layout2 {
+    width: 5vmin;
+    height: 1vmin;
+    margin: 1vmin;
+}
+
+
+.cruiser_layout2 {
+    width: 3vmin;
+    height: 1vmin;
+    margin: 1vmin;
+}
+
+
+.submarine_layout2 {
+    width: 3vmin;
+    height: 1vmin;
+    margin: 1vmin;
+}
+
+.destroyer_layout2 {
     width: 2vmin;
     height: 1vmin;
     margin: 1vmin;

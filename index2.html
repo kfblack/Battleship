@@ -21,15 +21,16 @@
         <div id="4" class="destroyer_layout destroyer ship" draggable="true"></div>
     </section>
     <section class="ships source_2">
-        <div id="0" class="battleship_layout battleship ship" draggable="true"></div> 
-        <div id="1" class="carrier_layout carrier ship" draggable="true"></div>
-        <div id="2" class="cruiser_layout cruiser ship" draggable="true"></div>
-        <div id="3" class="submarine_layout submarine ship" draggable="true"></div>
-        <div id="4" class="destroyer_layout destroyer ship" draggable="true"></div>
+        <div id="0" class="battleship_layout2 battleship ship" draggable="true"></div> 
+        <div id="1" class="carrier_layout2 carrier ship" draggable="true"></div>
+        <div id="2" class="cruiser_layout2 cruiser ship" draggable="true"></div>
+        <div id="3" class="submarine_layout2 submarine ship" draggable="true"></div>
+        <div id="4" class="destroyer_layout2 destroyer ship" draggable="true"></div>
     </section>
-    <h1><span id="player_turn">Player 1</span>'s Turn<br><span id="hit_message">It's a Hit!</span></h1>
+    <h1><span id="player_turn">Player 1</span><span id="player_turns">'s Turn</span><br><span id="hit_message">It's a Hit!</span></h1>
     <h2>Player 1:<br></br> Player 2:</h2>
     <h3>Player 1 Ships Remaining: <br>Player 2 Ships Remaming: </h3>
+    <h4><span id="win_message">Player 1</span><span id="wins_message">Wins!</span></h4>
     <div class="both_boards">
         <section class="board target_1" id="board_pieces_player1">
             <div id="c0r9"></div>
@@ -254,6 +255,13 @@
         <button id="rotate_cruiser">Rotate</button>
         <button id="rotate_submarine">Rotate</button>
         <button id="rotate_destroyer">Rotate</button>
+    </section>
+    <section class="rotate_buttons2">
+        <button id="rotate_battleship2">Rotate</button>
+        <button id="rotate_carrier2">Rotate</button>
+        <button id="rotate_cruiser2">Rotate</button>
+        <button id="rotate_submarine2">Rotate</button>
+        <button id="rotate_destroyer2">Rotate</button>
     </section>
     <section>
         <button id="play_music">Music On/Off</button>

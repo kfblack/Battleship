@@ -7,6 +7,11 @@ const rotateButtonCarrier = document.getElementById("rotate_carrier");
 const rotateButtonCruiser = document.getElementById("rotate_cruiser");
 const rotateButtonSubmarine = document.getElementById("rotate_submarine");
 const rotateButtonDestroyer = document.getElementById("rotate_destroyer");
+const rotateButtonBattleship2 = document.getElementById("rotate_battleship2");
+const rotateButtonCarrier2 = document.getElementById("rotate_carrier2");
+const rotateButtonCruiser2 = document.getElementById("rotate_cruiser2");
+const rotateButtonSubmarine2 = document.getElementById("rotate_submarine2");
+const rotateButtonDestroyer2 = document.getElementById("rotate_destroyer2");
 const sourceOne = document.querySelector(".source_1");
 const targetOne = document.querySelector(".target_1");
 const sourceTwo = document.querySelector(".source_2");
@@ -91,6 +96,71 @@ function rotatePieceDestroyer() {
   destroyerPiece.style.transform = `rotate(${angle}deg)`;
 };
 
+rotateButtonBattleship2.addEventListener("click", rotatePieceBattleship2);
+
+function rotatePieceBattleship2() {
+  const battleshipPiece2 = document.querySelector(".battleship_layout2");
+  if (angle === 0) {
+    angle = 90;
+  } else {
+    angle = 0;
+  }
+  battleshipPiece2.style.transform = `rotate(${angle}deg)`;
+};
+
+rotateButtonCarrier2.addEventListener("click", rotatePieceCarrier2);
+
+
+function rotatePieceCarrier2() {
+  const carrierPiece2 = document.querySelector(".carrier_layout2");
+  if (angle === 0) {
+    angle = 90;
+  } else {
+    angle = 0;
+  }
+  carrierPiece2.style.transform = `rotate(${angle}deg)`;
+};
+
+rotateButtonCruiser2.addEventListener("click", rotatePieceCruiser2);
+
+
+function rotatePieceCruiser2() {
+  const cruiserPiece2 = document.querySelector(".cruiser_layout2");
+  if (angle === 0) {
+    angle = 90;
+  } else {
+    angle = 0;
+  }
+  cruiserPiece2.style.transform = `rotate(${angle}deg)`;
+};
+
+rotateButtonSubmarine2.addEventListener("click", rotatePieceSubmarine2);
+
+
+function rotatePieceSubmarine2() {
+  const submarinePiece2 = document.querySelector(".submarine_layout2");
+  if (angle === 0) {
+    angle = 90;
+  } else {
+    angle = 0;
+  }
+  submarinePiece2.style.transform = `rotate(${angle}deg)`;
+};
+
+rotateButtonDestroyer2.addEventListener("click", rotatePieceDestroyer2);
+
+
+function rotatePieceDestroyer2() {
+  const destroyerPiece2 = document.querySelector(".destroyer_layout2");
+  if (angle === 0) {
+    angle = 90;
+  } else {
+    angle = 0;
+  }
+  destroyerPiece2.style.transform = `rotate(${angle}deg)`;
+};
+
+
 //code for drag and drop functionality 
 
 sourceOne.addEventListener("dragstart", function(evt) {
@@ -155,7 +225,10 @@ let scoresUpdated = false;
 
 const gameDirections = document.querySelectorAll(".game_directions");
 const turnMessage = document.getElementById("player_turn");
+const turnMessage2 = document.getElementById("player_turns");
 const hitMessage = document.getElementById("hit_message");
+const winMessage = document.getElementById("win_message");
+const winMessage2 = document.getElementById("wins_message");
 const playerScore = document.querySelector("h2");
 const restartButton = document.getElementById("replay_button");
 const startButton = document.getElementById("start_button");
@@ -222,12 +295,53 @@ function updatedShipCount() {
 
 function renderWinnerTurnMessage() {
   if (winner) {
-    turnMessage.innerHTML = `<span id="player_turn">${players[winner]}</span> Wins!`
+    winMessage.innerHTML = `${players[winner]}`
+    showWinner();
+    showWinner2();
+    hideTurns();
+    hideTurns2();
+    hideHitMessage();
+    hideStartButton();
     updateScores();
   } else {
+    hideWinner();
+    hideWinner2();
     turnMessage.innerHTML = `${players[turn]}`
   };
 };
+
+function showWinner () {
+  winMessage.style.visibility = "visible";
+}
+
+function hideWinner () {
+  winMessage.style.visibility = "hidden";
+}
+
+function showWinner2 () {
+  winMessage2.style.visibility = "visible";
+}
+
+function hideWinner2 () {
+  winMessage2.style.visibility = "hidden";
+}
+
+function hideTurns () {
+  turnMessage.style.visibility = "hidden";
+}
+
+function hideTurns2 () {
+  turnMessage2.style.visibility = "hidden";
+}
+
+function hideHitMessage () {
+  hitMessage.style.visibility = "hidden";
+}
+
+function hideStartButton () {
+  startButton.style.visibility = "hidden";
+}
+
 
 function updateScores () {
   if (winner && !scoresUpdated) {
@@ -356,6 +470,7 @@ function startNewGame() {
   } else {
     init();
     hideUI();
+    hideShips();
     playContinueClick();
   }
 }
@@ -363,11 +478,9 @@ function startNewGame() {
 function hideUI() {
   const rotateButtons = document.querySelectorAll(".rotate_buttons");
   const instructionsLayout = document.querySelector(".layout_direction");
-  const restartButton = document.getElementById("replay_button");
   rotateButtons.forEach(button => {
     button.style.visibility = "hidden"
   });
-  restartButton.style.visibility = "hidden";
   instructionsLayout.style.visibility = "hidden";
 }
 
