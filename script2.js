@@ -230,6 +230,8 @@ const hitMessage = document.getElementById("hit_message");
 const winMessage = document.getElementById("win_message");
 const winMessage2 = document.getElementById("wins_message");
 const playerScore = document.querySelector("h2");
+const playerShipsRemain1 = document.getElementById("player1_remains");
+const playerShipsRemain2 = document.getElementById("player2_remains");
 const restartButton = document.getElementById("replay_button");
 const startButton = document.getElementById("start_button");
 const remainingShips = document.querySelector("h3");
@@ -238,6 +240,14 @@ const hitSound = document.getElementById("hit_ship");
 const missSound = document.getElementById("miss_ship");
 const winSound = document.getElementById("win_game");
 let shipPlacementComplete = false;
+
+function playerShipRemain1 () {
+  playerShipsRemain1.innerHTML = `${shipCount["1"]}`;
+}
+
+function playerShipRemain2 () {
+  playerShipsRemain2.innerHTML = `${shipCount["-1"]}`;
+}
 
 restartButton.addEventListener("click", resetGame);
 startButton.addEventListener("click", startNewGame);
@@ -248,6 +258,7 @@ function resetGame() {
   showShips();
   showButtons();
   remainingShipsToPlace = 10;
+  shipPlacementComplete = false;
 }
 
 function showButtons() {
@@ -274,7 +285,10 @@ function init() {
     "-1": 0,
   }
   turn = 1;
-  shipCount = 5;
+  shipCount = {
+    "1": 5,
+    "-1": 5,
+  };
   render();
 }
 
@@ -370,12 +384,16 @@ function handleMoveClick (evt) {
     playHitSound();
     hitMessage.innerHTML = `<span id="hit_message">Hit!</span>`;
     clickedCell.style.backgroundColor = "red";
+    playerShipRemain1();
+    playerShipRemain2();
     if (areAllShipsSunk()) {
       winner = turn;
     }
   };
   turn *= -1;
   render();
+  playerShipRemain1();
+  playerShipRemain2();
 };
 
 document.querySelectorAll(".both_boards").forEach(cell => {
@@ -392,7 +410,7 @@ function updateShipStatus(clickedCell) {
       ship.length--;
       if (ship.length === 0) {
         ship.sunk = true;
-        shipCount--;
+        shipCount[turn]--;
         if (shipCount === 0) {
           winner = turn;
         }
@@ -457,7 +475,6 @@ function showShips() {
 
 let remainingShipsToPlace = 10
 function placementComplete() {
-  hideShips();
   remainingShipsToPlace--;
   if (remainingShipsToPlace === 0) {
     shipPlacementComplete = true;
@@ -477,8 +494,12 @@ function startNewGame() {
 
 function hideUI() {
   const rotateButtons = document.querySelectorAll(".rotate_buttons");
+  const rotateButtons2 = document.querySelectorAll(".rotate-buttons2");
   const instructionsLayout = document.querySelector(".layout_direction");
   rotateButtons.forEach(button => {
+    button.style.visibility = "hidden"
+  });
+  rotateButtons2.forEach(button => {
     button.style.visibility = "hidden"
   });
   instructionsLayout.style.visibility = "hidden";

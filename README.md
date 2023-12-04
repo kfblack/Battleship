@@ -13,7 +13,7 @@ This project is a browser-based game utilizing aspects of HTML, CSS and JavaScri
 - VS Code
 ***
 #### **_Getting Started_**
-[Click here to access the game!](http://127.0.0.1:5500/index.html) | [Excalidraw Wireframe](https://excalidraw.com/#json=BW8bqyMbvTDCvlW9cOwSf,dQISyJW9DRdwKYYZIDZWSQ) | [Psuedocode](https://docs.google.com/document/d/1KfQWf1qW6ScpNuFh3tbMZSaZ4Tq4hj5joyYAANEl9Ps/edit?usp=sharing) | [Trello Board](https://trello.com/b/PAR61byO/battleship-browser-game)
+[Click here to access the game!](my-battleship-game.surge.sh) | [Excalidraw Wireframe](https://excalidraw.com/#json=BW8bqyMbvTDCvlW9cOwSf,dQISyJW9DRdwKYYZIDZWSQ) | [Psuedocode](https://docs.google.com/document/d/1KfQWf1qW6ScpNuFh3tbMZSaZ4Tq4hj5joyYAANEl9Ps/edit?usp=sharing) | [Trello Board](https://trello.com/b/PAR61byO/battleship-browser-game)
 ***
 #### **_Screenshots_**
 
