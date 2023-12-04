@@ -1,6 +1,7 @@
 // general constants to be used throughout code
 const introSound = document.getElementById("intro_sound");
 const musicButton = document.getElementById("play_music");
+const continueClick = document.getElementById("continue_click");
 const rotateButtonBattleship = document.getElementById("rotate_battleship");
 const rotateButtonCarrier = document.getElementById("rotate_carrier");
 const rotateButtonCruiser = document.getElementById("rotate_cruiser");
@@ -160,14 +161,20 @@ const restartButton = document.getElementById("replay_button");
 const startButton = document.getElementById("start_button");
 const remainingShips = document.querySelector("h3");
 const bothBoards = document.querySelectorAll("both-boards");
+const hitSound = document.getElementById("hit_ship");
+const missSound = document.getElementById("miss_ship");
+const winSound = document.getElementById("win_game");
+let shipPlacementComplete = false;
 
 restartButton.addEventListener("click", resetGame);
 startButton.addEventListener("click", startNewGame);
 
 function resetGame() {
   init();
+  playContinueClick();
   showShips();
   showButtons();
+  remainingShipsToPlace = 10;
 }
 
 function showButtons() {
@@ -231,21 +238,22 @@ function updateScores () {
   playerScore.innerHTML = `Player 1: ${scoreCount["1"]} <br></br> Player 2: ${scoreCount["-1"]}`;
 };
 
-function playWinSound() {
-};
 
 function handleMoveClick (evt) {
   const clickedCell = evt.target;
   if (winner) {
+    playWinSound();
     return;
   }
   if (!clickedCell.classList.contains("active")) {
+    playMissSound();
     hitMessage.innerHTML = `<span id="hit_message">Miss!</span>`;
     clickedCell.style.backgroundColor = "blue";
     updateShipStatus(clickedCell);
   } else {
     const parentCell = clickedCell.children[0];
     updateShipStatus(parentCell);
+    playHitSound();
     hitMessage.innerHTML = `<span id="hit_message">Hit!</span>`;
     clickedCell.style.backgroundColor = "red";
     if (areAllShipsSunk()) {
@@ -333,14 +341,23 @@ function showShips() {
   });
 }
 
+let remainingShipsToPlace = 10
 function placementComplete() {
   hideShips();
+  remainingShipsToPlace--;
+  if (remainingShipsToPlace === 0) {
+    shipPlacementComplete = true;
+  }
 }
 
 function startNewGame() {
-  init();
-  hideUI();
-  placementComplete();
+  if (!placementComplete) {
+    alert("Please complete ship placement before starting the game!");
+  } else {
+    init();
+    hideUI();
+    playContinueClick();
+  }
 }
 
 function hideUI() {
@@ -352,4 +369,20 @@ function hideUI() {
   });
   restartButton.style.visibility = "hidden";
   instructionsLayout.style.visibility = "hidden";
+}
+
+function playHitSound() {
+  hitSound.play();
+}
+
+function playMissSound() {
+  missSound.play();
+}
+
+function playWinSound() {
+  winSound.play();
+}
+
+function  playContinueClick() {
+  continueClick.play();
 }
