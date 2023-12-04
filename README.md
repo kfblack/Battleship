@@ -5,6 +5,8 @@
 ***
 #### **_Description_**
 This project is a browser-based game utilizing aspects of HTML, CSS and JavaScript. The game was made for the General Assembly software engineering immersive program as project #1, during Week 3 of the cohort. Battleship entails the player having to randomly select pieces of the opponents board to target, and the gaol is to sink all opposing players' ships. This is a turned-based game, and the first player to sink all of the oppositions' ships wins!
+
+In order to play the game, you need to navigate to the hyperlink below, then click "continue" to reach the second page for ship selection. From there, drag your ships into the grid, and have the second player do the same. Once completed, click "start game" where all ships will dissappear and you must click on the respective boxes to try to sink each other's ships. The first to sink all ships will be notified with a winning message, then you can click "restart" to replace ships and start again!
 ***
 #### **_Technologies Used_**
 - HTML
@@ -15,7 +17,7 @@ This project is a browser-based game utilizing aspects of HTML, CSS and JavaScri
 - Surge
 ***
 #### **_Getting Started_**
-[Click here to access the game!](my-battleship-game.surge.sh) | [Excalidraw Wireframe](https://excalidraw.com/#json=BW8bqyMbvTDCvlW9cOwSf,dQISyJW9DRdwKYYZIDZWSQ) | [Psuedocode](https://docs.google.com/document/d/1KfQWf1qW6ScpNuFh3tbMZSaZ4Tq4hj5joyYAANEl9Ps/edit?usp=sharing) | [Trello Board](https://trello.com/b/PAR61byO/battleship-browser-game)
+[Click here to access the game!](http://www.my-battleship-game.surge.sh) | [Excalidraw Wireframe](https://excalidraw.com/#json=BW8bqyMbvTDCvlW9cOwSf,dQISyJW9DRdwKYYZIDZWSQ) | [Psuedocode](https://docs.google.com/document/d/1KfQWf1qW6ScpNuFh3tbMZSaZ4Tq4hj5joyYAANEl9Ps/edit?usp=sharing) | [Trello Board](https://trello.com/b/PAR61byO/battleship-browser-game)
 ***
 #### **_Screenshots_**
 
