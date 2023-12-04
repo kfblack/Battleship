@@ -6,6 +6,7 @@
     <audio id="hit_ship" src="mixkit-explosion-in-battle-2809.wav" preload="auto"></audio>
     <audio id="miss_ship" src="mixkit-bomb-drop-cold-water-explosion-2806.wav" preload="auto"></audio>
     <audio id="win_game" src="mixkit-medieval-show-fanfare-announcement-226.wav" preload="auto"></audio>
+    <audio id="click_rotate" src="mixkit-cool-interface-click-tone-2568.wav" preload="auto"></audio>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' type='text/css' href='style2.css'/>
@@ -13,14 +14,14 @@
     <title>Battleship Select</title>
 </head>
 <body>
-    <section class="ships source_1">
+    <section class="ships1 source_1">
         <div id="0" class="battleship_layout battleship ship" draggable="true"></div> 
         <div id="1" class="carrier_layout carrier ship" draggable="true"></div>
         <div id="2" class="cruiser_layout cruiser ship" draggable="true"></div>
         <div id="3" class="submarine_layout submarine ship" draggable="true"></div>
         <div id="4" class="destroyer_layout destroyer ship" draggable="true"></div>
     </section>
-    <section class="ships source_2">
+    <section class="ships2 source_2">
         <div id="0" class="battleship_layout2 battleship ship" draggable="true"></div> 
         <div id="1" class="carrier_layout2 carrier ship" draggable="true"></div>
         <div id="2" class="cruiser_layout2 cruiser ship" draggable="true"></div>
@@ -28,9 +29,9 @@
         <div id="4" class="destroyer_layout2 destroyer ship" draggable="true"></div>
     </section>
     <h1><span id="player_turn">Player 1</span><span id="player_turns">'s Turn</span><br><span id="hit_message">It's a Hit!</span></h1>
-    <h2>Player 1:<br></br> Player 2:</h2>
+    <h2><span id="score">Score Count</span><br><span id="players">Player 1: <br></br> Player 2:</span></h2>
     <h3>Player 1 Ships Remaining:<span id="player1_remains"></span><br>Player 2 Ships Remaming:<span id="player2_remains"></span> </h3>
-    <h4><span id="win_message">Player 1</span><span id="wins_message">Wins!</span></h4>
+    <h4><span id="win_message">Player 1</span><span id="wins_message"> Wins!</span></h4>
     <div class="both_boards">
         <section class="board target_1" id="board_pieces_player1">
             <div id="c0r9"></div>

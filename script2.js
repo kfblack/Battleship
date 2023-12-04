@@ -2,6 +2,7 @@
 const introSound = document.getElementById("intro_sound");
 const musicButton = document.getElementById("play_music");
 const continueClick = document.getElementById("continue_click");
+const rotateClick = document.getElementById("click_rotate");
 const rotateButtonBattleship = document.getElementById("rotate_battleship");
 const rotateButtonCarrier = document.getElementById("rotate_carrier");
 const rotateButtonCruiser = document.getElementById("rotate_cruiser");
@@ -31,6 +32,10 @@ function stopIntroSound() {
     introSound.pause();
 }
 
+function rotateSound () {
+  rotateClick.play();
+}
+
 rotateButtonBattleship.addEventListener("click", rotatePieceBattleship);
 
 let angle = 0;
@@ -42,6 +47,7 @@ function rotatePieceBattleship() {
     angle = 0;
   }
   battleshipPiece.style.transform = `rotate(${angle}deg)`;
+  rotateSound();
 };
 
 rotateButtonCarrier.addEventListener("click", rotatePieceCarrier);
@@ -55,6 +61,7 @@ function rotatePieceCarrier() {
     angle = 0;
   }
   carrierPiece.style.transform = `rotate(${angle}deg)`;
+  rotateSound();
 };
 
 rotateButtonCruiser.addEventListener("click", rotatePieceCruiser);
@@ -68,6 +75,7 @@ function rotatePieceCruiser() {
     angle = 0;
   }
   cruiserPiece.style.transform = `rotate(${angle}deg)`;
+  rotateSound();
 };
 
 rotateButtonSubmarine.addEventListener("click", rotatePieceSubmarine);
@@ -81,6 +89,7 @@ function rotatePieceSubmarine() {
     angle = 0;
   }
   submarinePiece.style.transform = `rotate(${angle}deg)`;
+  rotateSound();
 };
 
 rotateButtonDestroyer.addEventListener("click", rotatePieceDestroyer);
@@ -94,6 +103,7 @@ function rotatePieceDestroyer() {
     angle = 0;
   }
   destroyerPiece.style.transform = `rotate(${angle}deg)`;
+  rotateSound();
 };
 
 rotateButtonBattleship2.addEventListener("click", rotatePieceBattleship2);
@@ -106,6 +116,7 @@ function rotatePieceBattleship2() {
     angle = 0;
   }
   battleshipPiece2.style.transform = `rotate(${angle}deg)`;
+  rotateSound();
 };
 
 rotateButtonCarrier2.addEventListener("click", rotatePieceCarrier2);
@@ -119,6 +130,7 @@ function rotatePieceCarrier2() {
     angle = 0;
   }
   carrierPiece2.style.transform = `rotate(${angle}deg)`;
+  rotateSound();
 };
 
 rotateButtonCruiser2.addEventListener("click", rotatePieceCruiser2);
@@ -132,6 +144,7 @@ function rotatePieceCruiser2() {
     angle = 0;
   }
   cruiserPiece2.style.transform = `rotate(${angle}deg)`;
+  rotateSound();
 };
 
 rotateButtonSubmarine2.addEventListener("click", rotatePieceSubmarine2);
@@ -145,6 +158,7 @@ function rotatePieceSubmarine2() {
     angle = 0;
   }
   submarinePiece2.style.transform = `rotate(${angle}deg)`;
+  rotateSound();
 };
 
 rotateButtonDestroyer2.addEventListener("click", rotatePieceDestroyer2);
@@ -158,6 +172,7 @@ function rotatePieceDestroyer2() {
     angle = 0;
   }
   destroyerPiece2.style.transform = `rotate(${angle}deg)`;
+  rotateSound();
 };
 
 
@@ -224,6 +239,7 @@ let scoresUpdated = false;
 
 
 const gameDirections = document.querySelectorAll(".game_directions");
+const firstMessage = document.querySelector("h1");
 const turnMessage = document.getElementById("player_turn");
 const turnMessage2 = document.getElementById("player_turns");
 const hitMessage = document.getElementById("hit_message");
@@ -256,15 +272,42 @@ function resetGame() {
   init();
   playContinueClick();
   showShips();
+  resetShipPosition1();
+  resetShipPosition2();
   showButtons();
+  showInstructions();
   remainingShipsToPlace = 10;
   shipPlacementComplete = false;
 }
 
+function showInstructions() {
+  const instructions = document.querySelector("section .layout_direction");
+  instructions.style.visibility = "visible";
+}
+
+function resetShipPosition1 () {
+  const shipPosition = document.querySelectorAll(".ships1")
+  shipPosition.forEach(ship => {
+    ship.style.transform = "translate(0, 0)"
+  });
+}
+
+function resetShipPosition2 () {
+  const shipPosition = document.querySelectorAll(".ships2")
+  shipPosition.forEach(ship => {
+    ship.style.transform = "translate(0, 0)"
+  });
+}
+
+
 function showButtons() {
   const rotateButtons = document.querySelectorAll(".rotate_buttons");
+  const rotateButtons2 = document.querySelectorAll(".rotate_buttons2");
   const restartButton = document.getElementById("replay_button");
   rotateButtons.forEach(button => {
+    button.style.visibility = "visible"
+  });
+  rotateButtons2.forEach(button => {
     button.style.visibility = "visible"
   });
   restartButton.style.visibility = "visible";
@@ -488,13 +531,18 @@ function startNewGame() {
     init();
     hideUI();
     hideShips();
+    showStartMessage();
     playContinueClick();
   }
 }
 
+function showStartMessage () {
+  firstMessage.style.visibility = "visible";
+}
+
 function hideUI() {
   const rotateButtons = document.querySelectorAll(".rotate_buttons");
-  const rotateButtons2 = document.querySelectorAll(".rotate-buttons2");
+  const rotateButtons2 = document.querySelectorAll(".rotate_buttons2");
   const instructionsLayout = document.querySelector(".layout_direction");
   rotateButtons.forEach(button => {
     button.style.visibility = "hidden"

@@ -8,6 +8,7 @@
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     margin-top: 5vmin;
+    transform: translate(75vmin, -77.8vmin);
 }
 
 #board_pieces_player2 > div {
@@ -25,9 +26,12 @@
     aspect-ratio: 1;
 }
 
+.both_boards {
+    max-width: 40%;
+}
 
 .layout_direction {
-    border: 1vmin solid black;
+    border: 0.3vmin solid black;
     padding: 2vmin;
     position: absolute;
     top: 0;
@@ -35,17 +39,31 @@
 }
 
 .game_directions {
-    border: 1vmin solid black;
+    border: 0.3vmin solid black;
     padding: 2vmin;
     position: absolute;
     top: 10vmin;
     left: 80%;
 }
 
-.ships {
+.ships1 {
     background-color: orange;
     width: 30vmin;
     height: 10vmin;
+    transform: translate(20vmin, 32vmin);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ships2 {
+    background-color: orange;
+    width: 30vmin;
+    height: 10vmin;
+    transform: translate(95vmin, 24vmin);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .battleship {
@@ -104,15 +122,15 @@
 
 .rotate_buttons {
     position: absolute;
-    top: 0;
-    left: 50%;
+    top: 28%;
+    left: 13%;
 }
 
 
 .rotate_buttons2 {
     position: absolute;
-    top: 30%;
-    left: 50%;
+    top: 28%;
+    left: 53%;
 }
 
 .battleship_layout2 {
@@ -164,4 +182,62 @@
     color: green;
     background-color: lightgrey;
     cursor: pointer;
+}
+
+h1 {
+    visibility: hidden;
+}
+
+#replay_button {
+    position: absolute;
+    top: 50%;
+    left: 90%;
+}
+
+#start_button {
+    position: absolute;
+    top: 45%;
+    left: 90%;
+}
+
+#play_music {
+    position: absolute;
+    top: 40%;
+    left: 90%;
+}
+
+h1, h2, h3, h4 {
+    transform: translate(60vmin, -15vmin);
+}
+
+#rotate_battleship:hover, #rotate_carrier:hover, #rotate_cruiser:hover, #rotate_submarine:hover, #rotate_destroyer:hover {
+    color: green;
+    background-color: lightgrey;
+    cursor: pointer;
+}
+
+#rotate_battleship2:hover, #rotate_carrier2:hover, #rotate_cruiser2:hover, #rotate_submarine2:hover, #rotate_destroyer2:hover {
+    color: green;
+    background-color: lightgrey;
+    cursor: pointer;
+}
+
+#score {
+    font-weight: bolder;
+    font-size: larger;
+}
+
+h2, h3 {
+    border: 0.3vmin solid black;
+    width: 21vmin;
+}
+
+h3 {
+    margin-top: 1vmin;
+    width: 27vmin;
+}
+
+h4 {
+    font-size: 4vmin;
+    margin-top: 1vmin;
 }
