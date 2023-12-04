@@ -13,12 +13,13 @@ const rotateButtonCarrier2 = document.getElementById("rotate_carrier2");
 const rotateButtonCruiser2 = document.getElementById("rotate_cruiser2");
 const rotateButtonSubmarine2 = document.getElementById("rotate_submarine2");
 const rotateButtonDestroyer2 = document.getElementById("rotate_destroyer2");
+//source and target used for drag and drop cababilities 
 const sourceOne = document.querySelector(".source_1");
 const targetOne = document.querySelector(".target_1");
 const sourceTwo = document.querySelector(".source_2");
 const targetTwo = document.querySelector(".target_2");
 
-// general functions for sound and rotation (could go back and make all rotate buttons 1 function to include all pieces)
+// general functions for sound and rotation (could make all rotate buttons 1 function to include all pieces)
 musicButton.addEventListener("click", function() {
     introSound.paused ? playIntroSound() : stopIntroSound();
 });
@@ -227,7 +228,7 @@ const destroyer = new Ship("Destroyer", 2)
 
 const ships = [battleship, carrier, cruiser, submarine, destroyer];
 
-//start of actual game logic 
+//start of game logic 
 
 let turn = 1;
 let winner;
@@ -237,7 +238,7 @@ let scoreCount;
 let shipCount; 
 let scoresUpdated = false;
 
-
+//more constants pertaining to gameplay flow 
 const gameDirections = document.querySelectorAll(".game_directions");
 const firstMessage = document.querySelector("h1");
 const turnMessage = document.getElementById("player_turn");
@@ -288,14 +289,14 @@ function showInstructions() {
 function resetShipPosition1 () {
   const shipPosition = document.querySelectorAll(".ships1")
   shipPosition.forEach(ship => {
-    ship.style.transform = "translate(0, 0)"
+    ship.style.transform = "translate(20vmin, 32vmin)"
   });
 }
 
 function resetShipPosition2 () {
   const shipPosition = document.querySelectorAll(".ships2")
   shipPosition.forEach(ship => {
-    ship.style.transform = "translate(0, 0)"
+    ship.style.transform = "translate(95vmin, 24vmin)"
   });
 }
 
@@ -475,7 +476,6 @@ function areAllShipsSunk() {
   return true;
 }
 
-//this is the probelm area, when the grid is clicked it is just reading the grid click and trying to match a ship to it, rather than recognizing there is a ship in it to compare
 function extractShipName(element) {
   const classList = element.classList;
   for (const className of classList) {
