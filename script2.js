@@ -213,21 +213,29 @@ targetTwo.addEventListener("drop", function(evt) {
 // ship OOP class
 
 class Ship {
-  constructor(name, length) {
+  constructor(name, length, player) {
       this.name = name
       this.length = length
       this.sunk = false
+      this.player = player;
   }
 }
 
-const battleship = new Ship("Battleship", 4)
-const carrier = new Ship("Carrier", 5)
-const cruiser = new Ship("Cruiser", 3)
-const submarine = new Ship("Submarine", 3)
-const destroyer = new Ship("Destroyer", 2)
+const battleship = new Ship("Battleship", 4, 1)
+const carrier = new Ship("Carrier", 5, 1)
+const cruiser = new Ship("Cruiser", 3, 1)
+const submarine = new Ship("Submarine", 3, 1)
+const destroyer = new Ship("Destroyer", 2, 1)
+
+const battleship2 = new Ship("Battleship", 4, -1)
+const carrier2 = new Ship("Carrier", 5, -1)
+const cruiser2 = new Ship("Cruiser", 3, -1)
+const submarine2 = new Ship("Submarine", 3, -1)
+const destroyer2 = new Ship("Destroyer", 2, -1)
 
 
 const ships = [battleship, carrier, cruiser, submarine, destroyer];
+const ships2 = [battleship2, carrier2, cruiser2, submarine2, destroyer2];
 
 //start of game logic 
 
@@ -300,10 +308,14 @@ function showInstructions() {
 }
 
 function resetShipPosition1 () {
-  const shipPosition = document.querySelectorAll(".board .ships1");
+  const shipPosition = document.querySelectorAll(".board div");
   shipPosition.forEach(ship => {
-    ship.style.transform = "translate(20vmin, 32vmin)"
-    });
+    if (ship.classList.contains("active")) {
+      ship.style.position = "absolute";
+      ship.style.top = "32vmin";
+      ship.style.left = "20vmin";
+    }
+  });
 }
 
 
@@ -469,33 +481,34 @@ document.querySelectorAll(".both_boards").forEach(cell => {
 
 function updateShipStatus(clickedCell) {
   const shipName = extractShipName(clickedCell);
-  if (shipName) {
-    const ship = findShipByName(shipName);
+  const player = clickedCell.getAttribute("data-player");
+  if (shipName && player) {
+    const ship = findShipByName(shipName, parseInt(player));
     if (ship) {
       ship.length--;
       if (ship.length === 0) {
         ship.sunk = true;
-        shipCount[turn * -1]--;
+        if (ship.player === 1) {
+          shipCount["1"]--;
+        } else if (ship.player === -1) {
+          shipCount["-1"]--;
+        }
         if (shipCount[turn * -1] === 0) {
           winner = turn;
-        }
+        };
       };
-    } else {
-      console.log(`No ship found with name "${shipName}"`);
-    }
-  } else {
-    console.log("no ship name found");
-  }
+    };
+  };
 };
 
 function areAllShipsSunk() {
   for (const ship of ships) {
     if (!ship.sunk) {
       return false;
-    }
-  }
+    };
+  };
   return true;
-}
+};
 
 function extractShipName(element) {
   const classList = element.classList;
@@ -510,9 +523,9 @@ function extractShipName(element) {
 }
 
 
-function findShipByName(shipName) {
+function findShipByName(shipName, player) {
   const cleanedShipName = shipName.trim().toLowerCase();
-  for (const ship of ships) {
+  for (const ship of (player === 1 ? ships : ships2)) {
     if (ship.name.toLowerCase() === cleanedShipName) {
       return ship;
     }
@@ -537,18 +550,7 @@ function showShips() {
   });
 }
 
-let remainingShipsToPlace = 10
-function placementComplete() {
-  remainingShipsToPlace--;
-  if (remainingShipsToPlace === 0) {
-    shipPlacementComplete = true;
-  }
-}
-
 function startNewGame() {
-  if (!placementComplete) {
-    alert("Please complete ship placement before starting the game!");
-  } else {
     init();
     hideUI();
     hideShips();
@@ -556,7 +558,6 @@ function startNewGame() {
     showTurns2();
     showStartMessage();
     playContinueClick();
-  }
 }
 
 function showStartMessage () {
