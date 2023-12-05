@@ -15,18 +15,18 @@
 </head>
 <body>
     <section class="ships1 source_1">
-        <div id="0" class="battleship_layout battleship ship" draggable="true"></div> 
-        <div id="1" class="carrier_layout carrier ship" draggable="true"></div>
-        <div id="2" class="cruiser_layout cruiser ship" draggable="true"></div>
-        <div id="3" class="submarine_layout submarine ship" draggable="true"></div>
-        <div id="4" class="destroyer_layout destroyer ship" draggable="true"></div>
+        <div id="0" data-player="1" class="battleship_layout battleship ship" draggable="true"></div> 
+        <div id="1" data-player="1" class="carrier_layout carrier ship" draggable="true"></div>
+        <div id="2" data-player="1" class="cruiser_layout cruiser ship" draggable="true"></div>
+        <div id="3" data-player="1" class="submarine_layout submarine ship" draggable="true"></div>
+        <div id="4" data-player="1" class="destroyer_layout destroyer ship" draggable="true"></div>
     </section>
     <section class="ships2 source_2">
-        <div id="0" class="battleship_layout2 battleship ship" draggable="true"></div> 
-        <div id="1" class="carrier_layout2 carrier ship" draggable="true"></div>
-        <div id="2" class="cruiser_layout2 cruiser ship" draggable="true"></div>
-        <div id="3" class="submarine_layout2 submarine ship" draggable="true"></div>
-        <div id="4" class="destroyer_layout2 destroyer ship" draggable="true"></div>
+        <div id="0" data-player="-1" class="battleship_layout2 battleship ship" draggable="true"></div> 
+        <div id="1" data-player="-1" class="carrier_layout2 carrier ship" draggable="true"></div>
+        <div id="2" data-player="-1" class="cruiser_layout2 cruiser ship" draggable="true"></div>
+        <div id="3" data-player="-1" class="submarine_layout2 submarine ship" draggable="true"></div>
+        <div id="4" data-player="-1" class="destroyer_layout2 destroyer ship" draggable="true"></div>
     </section>
     <h1><span id="player_turn">Player 1</span><span id="player_turns">'s Turn</span><br><span id="hit_message">It's a Hit!</span></h1>
     <h2><span id="score">Score Count</span><br><span id="players">Player 1: <br></br> Player 2:</span></h2>
@@ -239,7 +239,7 @@
         </section>
     </div>
     <section>
-        <p class="layout_direction">INSTRUCTIONS: Drag and drop each ship onto the board!</p>
+        <p class="layout_direction">INSTRUCTIONS: Drag and drop each ship onto the board, then press start game!</p>
     <div class="game_directions">
         <p>DIRECITONS:</p>
             <ul>
