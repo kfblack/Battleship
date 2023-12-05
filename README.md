@@ -22,20 +22,21 @@ In order to play the game, you need to navigate to the hyperlink below, then cli
 #### **_Screenshots_**
 
 ##### Starting Screen 
-![Intro. Screen]()
+![Intro. Screen](https://i.postimg.cc/GmC0NZS9/Start-Screen.png)
 
 ##### Ship Selection
-![Secondary Screen]()
+![Secondary Screen](https://i.postimg.cc/V652n15Z/Ship-Selection.png)
 
 ##### Gameplay 
-![Game in Progress]()
+![Game in Progress](https://i.postimg.cc/XYQ28hRR/Gameplay.png)
 
 ##### Winning Screen 
-![Game Over Screen]()
+![Game Over Screen](https://i.postimg.cc/5ydpyMzC/Winner-Screen.png)
 
 ***
 #### **_Future Updates_**
 - [ ] Incorporate actual ships as gamepieces 
+- [ ] Have the game adjust appropriatley to different sized screens 
 - [ ] Insert effects, such as explosions when a hit occurs
 - [ ] Have ships span multiple cells according to length 
 - [ ] Include a Player vs. Computer mode with varied difficulties

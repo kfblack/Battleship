@@ -308,21 +308,24 @@ function showInstructions() {
 }
 
 function resetShipPosition1 () {
-  const shipPosition = document.querySelectorAll(".board div");
+  const shipPosition = document.querySelectorAll(".board div.active");
   shipPosition.forEach(ship => {
-    if (ship.classList.contains("active")) {
-      ship.style.position = "absolute";
-      ship.style.top = "32vmin";
-      ship.style.left = "20vmin";
-    }
+    ship.childNodes[0].style.transform = "translate(20vmin, 32vmin)";
+    ship.childNodes[0].style.display = "flex";
+    ship.childNodes[0].style.alignItems = "center";
+    ship.childNodes[0].style.justifyContent = "center";
+    console.log(ship.childNodes[0]);
   });
 }
 
-
 function resetShipPosition2 () {
-  const shipPosition = document.querySelectorAll(".ships2")
+  const shipPosition = document.querySelectorAll(".board div.active")
   shipPosition.forEach(ship => {
-    ship.style.transform = "translate(95vmin, 24vmin)"
+    ship.childNodes[0].style.transform = "translate(20vmin, 32vmin)";
+    ship.childNodes[0].style.display = "flex";
+    ship.childNodes[0].style.alignItems = "center";
+    ship.childNodes[0].style.justifyContent = "center";
+    console.log(ship.childNodes[0]);
   });
 }
 
@@ -477,7 +480,7 @@ document.querySelectorAll(".both_boards").forEach(cell => {
   cell.addEventListener("click", handleMoveClick);
 });
 
-//attempting to draw out ship status from placing them within grids 
+//drawing out ship status from placing them within grids 
 
 function updateShipStatus(clickedCell) {
   const shipName = extractShipName(clickedCell);
@@ -518,7 +521,6 @@ function extractShipName(element) {
       return ship.name;
     }
   }
-  console.log("No ship name found");
   return null;
 }
 
