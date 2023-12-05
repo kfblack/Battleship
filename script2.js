@@ -226,6 +226,7 @@ const cruiser = new Ship("Cruiser", 3)
 const submarine = new Ship("Submarine", 3)
 const destroyer = new Ship("Destroyer", 2)
 
+
 const ships = [battleship, carrier, cruiser, submarine, destroyer];
 
 //start of game logic 
@@ -275,11 +276,23 @@ function resetGame() {
   showShips();
   resetShipPosition1();
   resetShipPosition2();
+  hideHitMessage();
+  hideTurns();
+  hideTurns2();
+  resetBoardColors();
   showButtons();
   showInstructions();
   remainingShipsToPlace = 10;
   shipPlacementComplete = false;
 }
+
+function resetBoardColors() {
+  const allCells = document.querySelectorAll(".board div");
+  allCells.forEach(cell => {
+    cell.style.backgroundColor = "white";
+  });
+}
+
 
 function showInstructions() {
   const instructions = document.querySelector("section .layout_direction");
@@ -287,11 +300,12 @@ function showInstructions() {
 }
 
 function resetShipPosition1 () {
-  const shipPosition = document.querySelectorAll(".ships1")
+  const shipPosition = document.querySelectorAll(".board .ships1");
   shipPosition.forEach(ship => {
     ship.style.transform = "translate(20vmin, 32vmin)"
-  });
+    });
 }
+
 
 function resetShipPosition2 () {
   const shipPosition = document.querySelectorAll(".ships2")
@@ -299,7 +313,6 @@ function resetShipPosition2 () {
     ship.style.transform = "translate(95vmin, 24vmin)"
   });
 }
-
 
 function showButtons() {
   const rotateButtons = document.querySelectorAll(".rotate_buttons");
@@ -392,6 +405,14 @@ function hideTurns2 () {
   turnMessage2.style.visibility = "hidden";
 }
 
+function showTurns () {
+  turnMessage.style.visibility = "visible";
+}
+
+function showTurns2 () {
+  turnMessage2.style.visibility = "visible";
+}
+
 function hideHitMessage () {
   hitMessage.style.visibility = "hidden";
 }
@@ -454,8 +475,8 @@ function updateShipStatus(clickedCell) {
       ship.length--;
       if (ship.length === 0) {
         ship.sunk = true;
-        shipCount[turn]--;
-        if (shipCount === 0) {
+        shipCount[turn * -1]--;
+        if (shipCount[turn * -1] === 0) {
           winner = turn;
         }
       };
@@ -531,6 +552,8 @@ function startNewGame() {
     init();
     hideUI();
     hideShips();
+    showTurns();
+    showTurns2();
     showStartMessage();
     playContinueClick();
   }
