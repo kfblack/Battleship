@@ -290,7 +290,6 @@ function resetGame() {
   resetBoardColors();
   showButtons();
   showInstructions();
-  remainingShipsToPlace = 10;
   shipPlacementComplete = false;
 }
 
@@ -314,7 +313,6 @@ function resetShipPosition1 () {
     ship.childNodes[0].style.display = "flex";
     ship.childNodes[0].style.alignItems = "center";
     ship.childNodes[0].style.justifyContent = "center";
-    console.log(ship.childNodes[0]);
   });
 }
 
@@ -325,7 +323,6 @@ function resetShipPosition2 () {
     ship.childNodes[0].style.display = "flex";
     ship.childNodes[0].style.alignItems = "center";
     ship.childNodes[0].style.justifyContent = "center";
-    console.log(ship.childNodes[0]);
   });
 }
 
